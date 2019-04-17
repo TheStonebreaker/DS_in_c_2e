@@ -16,6 +16,11 @@ int main()
 	addElement(a, 5, 2, 28);
 
 	printMatrix(a);
+	transpose(a, b);
+	printMatrix(b);
+	//fastTranspose(a, c);
+	add(a, b, c);
+	printMatrix(c);
 	
 	free(a), free(b), free(c);
 
