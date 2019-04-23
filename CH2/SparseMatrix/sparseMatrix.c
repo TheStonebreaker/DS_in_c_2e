@@ -212,7 +212,9 @@ void mmult(term a[], term b[], term d[])
 		fprintf(stderr, "Incompatible matrices\n");
 		exit(EXIT_FAILURE);
 	}
+	/* O(colB+totalB) */
 	fastTranspose(b, newB);
+	printMatrix(newB);
 	/* set boundary condition */
 	a[totalA+1].row = rowsA;
 	newB[totalB+1].row = colsB;
@@ -221,6 +223,8 @@ void mmult(term a[], term b[], term d[])
 	for(i = 1; i <= totalA;) {
 		column = newB[1].row;
 		for(j = 1; j <= totalB+1;) {
+			printf("i=%d, j=%d\n", i, j);
+			
 			/* multiply row of a by column of b */
 			if(a[i].row != row){
 				storeSum(d, &totalD, row, column, &sum);
@@ -247,6 +251,9 @@ void mmult(term a[], term b[], term d[])
 		for(; a[i].row == row; ++i);
 		rowBegin = i; row = a[i].row;
 	} /* end of for i <= totalA */
+	d[0].row = rowsA;
+	d[0].col = colsB;
+	d[0].value = totalD;
 }
 
 //===================================================================
