@@ -223,7 +223,7 @@ void mmult(term a[], term b[], term d[])
 	for(i = 1; i <= totalA;) {
 		column = newB[1].row;
 		for(j = 1; j <= totalB+1;) {
-			printf("i=%d, j=%d\n", i, j);
+			printf("i=%d, j=%d, row=%d, column=%d\n", i, j, row, column);
 			
 			/* multiply row of a by column of b */
 			if(a[i].row != row){
@@ -239,12 +239,16 @@ void mmult(term a[], term b[], term d[])
 			}
 			else switch (COMPARE(a[i].col, newB[j].col)) {
 				case -1: /* go to next term in a */
-					i++; break;
+					i++;
+					printf("case -1\n");
+					break;
 				case 0: /* add terms, go to next term in a and b */
 					sum += (a[i++].value*newB[j++].value);
+					printf("case 0\n");
 					break;
 				case 1: /* advance to next term in b */
 					j++;
+					printf("case 1\n");
 					break;
 				}
 		} /* end of for j <= totalB+1 */

@@ -22,7 +22,7 @@ int main()
 	printMatrix(b);
 	add(a, b, c);
 	printf("\nMatrix C=A+B:\n");
-	printMatrix(c);
+	//printMatrix(c);
 	mmult(a, b, d);
 	printf("\nMatrix D=A*B:\n");
 	printMatrix(d);
