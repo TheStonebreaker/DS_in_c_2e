@@ -37,6 +37,7 @@ int pmatch(char *string, char *pat)
 
 	while(i < lens && j < lenp)
 	{
+		//printf("(i,j)=(%d,%d)\n",i,j);
 		if(string[i] == pat[j])
 		{ ++i; ++j;}
 		else if(j == 0) ++i;
@@ -120,7 +121,7 @@ int main()
 	memset(s1, 0, sizeof(s1));
 	memset(s2, 0, sizeof(s2));
 	strcpy(s1, "ababacc");
-	strcpy(s2, "bacc");
+	strcpy(s2, "abaa");
 	fail(s2);
 	int i = 0, find = 0;
 	for(i = 0; i < strlen(s2); ++i)
