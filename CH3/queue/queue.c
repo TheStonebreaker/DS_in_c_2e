@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <limits.h>
 #include "queue.h"
 
@@ -6,6 +7,8 @@ void CreateQueue()
 {
 	//front = rear = -1;
 	front = rear = 0;
+	capacity = 1;
+	queue = (element *)malloc(sizeof(element)*capacity);
 }
 
 int IsEmpty()
@@ -16,16 +19,32 @@ int IsEmpty()
 int IsFull()
 {
 	//return rear == MAX_SIZE -1;
-	return front == ((rear + 1) % MAX_SIZE);
+	return front == ((rear + 1) % capacity);
+}
+
+void resize()
+{
+	
+	int newCapacity = capacity * 2;
+	queue = (element *)realloc(queue, sizeof(element)*newCapacity);
+	
+	if(front > rear)
+	{
+		int i, j = newCapacity -1;
+		for(i = capacity - 1; i > front; --i, --j)
+			queue[j] = queue[i];
+		front = j;
+	}
+	capacity = newCapacity;
 }
 
 void AddQ(element e1)
 {
 	if(IsFull())
-		return;
+		resize();
 
 	//queue[++rear] = e1;
-	rear = (rear + 1) % MAX_SIZE;
+	rear = (rear + 1) % capacity;
 	queue[rear] = e1;
 }
 
@@ -43,7 +62,7 @@ element DeleteQ()
 		return queueEmpty();
 
 	//return queue[++front];
-	front = (front + 1) % MAX_SIZE;
+	front = (front + 1) % capacity;
 	return queue[front];
 }
 
@@ -58,7 +77,7 @@ void printQ()
 	printf("\n");
 	*/
 
-	for(i = front + 1; i != rear; i = (i+1)%MAX_SIZE)
+	for(i = front + 1; i != rear; i = (i+1)%capacity)
 		printf("%d ", queue[i].key);
 	printf("%d\n",queue[i].key);
 }

@@ -8,12 +8,14 @@ typedef struct
 	int key;
 }element;
 
-int front, rear;
-element queue[MAX_SIZE];
+int front, rear, capacity;
+//element queue[MAX_SIZE];
+element *queue;
 
 void CreateQueue();
 int IsFull();
 int IsEmpty();
+void resize();
 element queueEmpty();
 void AddQ(element e1);
 element DeleteQ();
