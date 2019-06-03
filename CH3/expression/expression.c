@@ -116,7 +116,8 @@ int main()
 {
 	createStack();
 	memset(expr, 0, sizeof(expr));
-	printf("Input expression:");
+	//printf("Input expression:");
+	printf("Input expression to convert to postfix:");
 	scanf("%s", expr);
 	postfix();
 	//printf("answer: %d\n",eval());
